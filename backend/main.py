@@ -15,6 +15,7 @@ from app.models.assessment import Assessment
 Base.metadata.create_all(bind=engine)
 
 
+# Create FastAPI application
 app = FastAPI(
     title="Aegis AI Governance Platform",
     description="AI Governance and Compliance Assessment API",
@@ -22,11 +23,16 @@ app = FastAPI(
 )
 
 
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "http://localhost:5174",
+        "http://localhost:5175",
         "http://127.0.0.1:5173",
+        "http://127.0.0.1:5174",
+        "http://127.0.0.1:5175",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -62,7 +68,6 @@ def assess_ai_system(data: AssessmentRequest):
     db = SessionLocal()
 
     try:
-
         # Save assessment
         db_assessment = Assessment(
             system_name=data.system_name,
@@ -79,7 +84,6 @@ def assess_ai_system(data: AssessmentRequest):
 
     finally:
         db.close()
-
 
     return {
         "system_name": data.system_name,
