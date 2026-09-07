@@ -5,7 +5,7 @@ import type {
   AssessmentResponse,
 } from "../types";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://aegis-ai-governance-platform.onrender.com";
 
 export const assessAISystem = async (
   data: AssessmentRequest
